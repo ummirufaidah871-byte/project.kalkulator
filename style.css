@@ -1,0 +1,161 @@
+:root {
+    --latar: #2b3a42;        /* warna latar halaman */
+    --bodi: #d9dee3;         /* warna badan kalkulator */
+    --bodi-gelap: #aeb6bd;   /* garis tepi input */
+    --lcd: #c9d6a9;          /* warna layar hasil */
+    --lcd-teks: #1f2a1c;     /* warna angka di layar */
+    --tombol: #3a4048;       /* warna tombol */
+    --aksen: #e8742c;        /* oranye saat tombol disentuh */
+    --teks: #1d2328;         /* warna teks umum */
+}
+ 
+/* Ukuran elemen dihitung termasuk padding dan border */
+* {
+    box-sizing: border-box;
+}
+ 
+/* Latar halaman */
+html {
+    background: var(--latar);
+}
+ 
+/* Badan kalkulator: kotak di tengah halaman */
+body {
+    width: min(360px, calc(100% - 32px));
+    margin: 40px auto;
+    padding: 24px 22px 26px;
+    background: var(--bodi);
+    color: var(--teks);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    border-radius: 18px;
+    box-shadow:
+        inset 0 2px 0 #ffffff,
+        0 18px 40px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+ 
+/* Judul */
+h2 {
+    margin: 0 0 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--lcd-teks);
+}
+ 
+/* Label di atas kolom input */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+ 
+/* <br> di HTML disembunyikan; jarak diatur lewat margin */
+br {
+    display: none;
+}
+ 
+/* Kolom input angka */
+input[type="number"] {
+    width: 100%;
+    padding: 11px 12px;
+    margin-bottom: 16px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--teks);
+    background: #eef1f3;
+    border: 1px solid var(--bodi-gelap);
+    border-radius: 8px;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.12);
+}
+ 
+/* Hilangkan panah naik-turun bawaan browser */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+ 
+/* Penanda saat input atau tombol dipilih dengan keyboard */
+input:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--aksen);
+    outline-offset: 2px;
+}
+ 
+/* Wadah empat tombol: grid 4 kolom */
+body > div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+ 
+/* Tombol operasi */
+button {
+    height: 56px;
+    font: inherit;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #f2f4f5;
+    background: var(--tombol);
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #22262b;
+    transition: background 0.15s, transform 0.08s, box-shadow 0.08s;
+}
+ 
+/* Saat kursor di atas tombol */
+button:hover {
+    background: var(--aksen);
+    box-shadow: 0 4px 0 #a9500f;
+}
+ 
+/* Saat tombol ditekan: bergeser turun seperti tombol sungguhan */
+button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #a9500f;
+}
+ 
+/* Layar hasil (LCD) */
+h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 76px;
+    margin: 0;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--lcd-teks);
+    background: var(--lcd);
+    border-radius: 8px;
+    box-shadow:
+        inset 0 3px 6px rgba(0, 0, 0, 0.25),
+        0 1px 0 #ffffff;
+}
+ 
+/* Angka hasil, rata kanan seperti layar kalkulator */
+#hasil {
+    flex: 1;
+    text-align: right;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+ 
+/* Hormati pengguna yang mematikan animasi di perangkatnya */
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
